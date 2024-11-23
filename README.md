@@ -1,10 +1,10 @@
 # SecondProject
 
-#Struct ir Class spartos testavimas
+# Struct ir Class spartos testavimas
 
 Testuojant buvo paimtas 3 testavimų vidurkis, buvo naudojamas vector konteineris ir testuojama su 1000000 ir 10000000 įrašais. Tiek su Struct, tiek su Class buvo naudojami tie patys failais, spartos analizės patikimumui.
 
-##Testavimas su 1000000 įrašų
+## Testavimas su 1000000 įrašų
 
 |Veiksmas                                | Naudojant Struct | Naudojant Class | Kuris greitesnis? |
 |----------------------------------------|------------------|-----------------|-------------------|
@@ -16,7 +16,7 @@ Testuojant buvo paimtas 3 testavimų vidurkis, buvo naudojamas vector konteineri
 |**Įrašymas į failą "vargšiukai.txt"**   | 2.4024 s         | 1.7632 s        | Class             |
 |**Bendras**                             | 16.3484 s        | 12.0184 s       | Class             |
 
-##Testavimas su 10000000 įrašų
+## Testavimas su 10000000 įrašų
 
 |Veiksmas                                | Naudojant Struct | Naudojant Class | Kuris greitesnis? |
 |----------------------------------------|------------------|-----------------|-------------------|
@@ -28,7 +28,7 @@ Testuojant buvo paimtas 3 testavimų vidurkis, buvo naudojamas vector konteineri
 |**Įrašymas į failą "vargšiukai.txt"**   | 19.1892 s        | 16.1792 s       | Class             |
 |**Bendras**                             | 170.831 s        | 133.119 s       | Class             |
 
-##Išvada
+## Išvada
 
 Matome, kad vienareikšmiškai greičiau veikė Class.
 
