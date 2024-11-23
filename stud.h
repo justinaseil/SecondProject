@@ -4,8 +4,6 @@
 #include "mylib.h"
 
 class Stud {
-    friend class FileManager;
-    friend class Rusiavimas;
 
 private:
     string vardas;
@@ -28,11 +26,16 @@ public:
 
 const string& getVardas() const { return vardas; }
     const string& getPavarde() const { return pavarde; }
-    const vector<double>& getND() const { return ND; }
+    vector<double>& getND() { return ND; }
     double getEgz() const { return egz; }
     double getVid() const { return vid; }
     double getMed() const { return med; }
     bool getSuMediana() const { return suMediana; }
+    double getRezmed() const { return rezmed; }
+    double getRezvid() const { return rezvid; }
+
+    void setRezVid(double r) { rezvid = r; }
+    void setRezMed(double r) { rezmed = r; }
 
     void addND(double grade) {
         if (grade >= 0 && grade <= 10) {
@@ -118,21 +121,23 @@ public:
     string line;
     while (getline(file, line)) {
         istringstream ss(line);
-        Stud student;
-        ss >> student.vardas >> student.pavarde;
+        string vardas, pavarde;
+        ss >> vardas >> pavarde;
+
+        Stud student(vardas, pavarde);
 
         double grade;
         while (ss >> grade) {
             if (grade >= 0 && grade <= 10) {
-                student.ND.push_back(grade);
+               student.addND(grade); ;
             } else {
                 throw runtime_error("Invalid grade format in file.");
             }
         }
 
-        if (!student.ND.empty()) {
-            student.egz = student.ND.back();
-            student.ND.pop_back();
+        if (!student.getND().empty()) {
+            student.setEgz(student.getND().back());
+            student.getND().pop_back();
         } else {
             throw runtime_error("No grades found in file.");
         }
@@ -161,13 +166,13 @@ public:
         file << "-----------------------------------------------------------------------" << endl;
 
         for (const auto& student : students) {
-            file << left << setw(20) << student.vardas
-                 << setw(25) << student.pavarde
+            file << left << setw(20) << student.getVardas()
+                 << setw(25) << student.getPavarde()
                  << fixed << setprecision(2);
-            if (student.suMediana) {
-                file << student.rezmed << endl;
+            if (student.getSuMediana()) {
+                file << student.getRezmed() << endl;
             } else {
-                file << student.rezvid << endl;
+                file << student.getRezvid() << endl;
             }
         }
 
@@ -188,15 +193,27 @@ class Rusiavimas {
     static void sortabc(Container& students) {
     auto start = steady_clock::now();
 
-    if constexpr (is_same<Container, vector<Stud>>::value) {
-        sort(students.begin(), students.end(), [](const Stud &a, const Stud &b) {
-            return toupper(a.vardas[0]) < toupper(b.vardas[0]);
-        });
-    } else if constexpr (is_same<Container, list<Stud>>::value) {
-        students.sort([](const Stud &a, const Stud &b) {
-            return toupper(a.vardas[0]) < toupper(b.vardas[0]);
-        });
-    }
+     if constexpr (is_same<Container, vector<Stud>>::value) {
+            sort(students.begin(), students.end(), [](const Stud &a, const Stud &b) {
+                string vardasA = a.getVardas();
+                string vardasB = b.getVardas();
+
+                transform(vardasA.begin(), vardasA.end(), vardasA.begin(), ::toupper);
+                transform(vardasB.begin(), vardasB.end(), vardasB.begin(), ::toupper);
+
+                return vardasA < vardasB;
+            });
+        } else if constexpr (is_same<Container, list<Stud>>::value) {
+            students.sort([](const Stud &a, const Stud &b) {
+                string vardasA = a.getVardas();
+                string vardasB = b.getVardas();
+
+                transform(vardasA.begin(), vardasA.end(), vardasA.begin(), ::toupper);
+                transform(vardasB.begin(), vardasB.end(), vardasB.begin(), ::toupper);
+
+                return vardasA < vardasB;
+            });
+        }
 
     auto end = steady_clock::now();
     duration<double> diff = duration_cast<duration<double>>(end - start);
@@ -208,12 +225,12 @@ class Rusiavimas {
     auto start = steady_clock::now();
 
     auto it = partition(students.begin(), students.end(), [suMediana](Stud& student) {
-        if (suMediana && student.rezmed == 0) {
+        if (suMediana && student.getRezmed() == 0) {
             student.galutinismed();
-        } else if (!suMediana && student.rezvid == 0) {
+        } else if (!suMediana && student.getRezvid() == 0) {
             student.galutinisvid();
         }
-        return suMediana ? (student.rezmed < 5.0) : (student.rezvid < 5.0);
+        return suMediana ? (student.getRezmed() < 5.0) : (student.getRezvid() < 5.0);
     });
 
     vargsiukai.insert(vargsiukai.end(), students.begin(), it);

@@ -5,7 +5,7 @@ int main() {
     vector<Stud> vec1;
     vector<Stud> vargsiukai;
     Stud s;
-    vector<int> numStudents = {1000, 10000, 100000, 1000000, 10000000};
+    vector<int> numStudents = {1000000, 10000000};
     char choice;
     bool suMediana = false;
 
