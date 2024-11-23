@@ -21,8 +21,10 @@ private:
 
 public:
     Stud() : egz(0), vid(0), med(0), suMediana(false) {}
-    Stud(const std::string& vard, const std::string& pav)
+    Stud(const string& vard, const string& pav)
         : vardas(vard), pavarde(pav), egz(0), vid(0), med(0), suMediana(false) {}
+
+~Stud() {}
 
 const string& getVardas() const { return vardas; }
     const string& getPavarde() const { return pavarde; }
@@ -32,11 +34,24 @@ const string& getVardas() const { return vardas; }
     double getMed() const { return med; }
     bool getSuMediana() const { return suMediana; }
 
-    void setVardas(const string& v) { vardas = v; }
-    void setPavarde(const string& p) { pavarde = p; }
-    void addND(double grade) { ND.push_back(grade); }
-    void setEgz(double e) { egz = e; }
+    void addND(double grade) {
+        if (grade >= 0 && grade <= 10) {
+            ND.push_back(grade);
+        } else {
+            throw runtime_error("Grade out of range.");
+        }
+    }
+
+    void setEgz(double e) {
+        if (e >= 0 && e <= 10) {
+            egz = e;
+        } else {
+            throw runtime_error("Exam grade out of range.");
+        }
+    }
+
     void setSuMediana(bool value) { suMediana = value; }
+
 
     void vidurkis();
     void mediana();
