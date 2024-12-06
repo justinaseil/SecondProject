@@ -33,35 +33,42 @@ void Stud::galutinismed() {
     rezmed = 0.4 * med + 0.6 * egz;
 }
 
-void Stud::ived() {
+istream& operator>>(istream& is, Stud& obj) {
     cout << "Input Name and Surname: ";
-    cin >> vardas >> pavarde;
+    string vardas, pavarde;
+
+    is >> vardas >> pavarde;
+
+    obj.vardas = vardas;
+    obj.pavarde = pavarde;
+
 
     while (true) {
         cout << "Input Exam points: ";
-        if (cin >> egz && egz >= 0 && egz <= 10) {
+        if (is >> obj.egz && obj.egz >= 0 && obj.egz <= 10) {
             break;
         } else {
             cout << "Error. Try again" << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            is.clear();
+            is.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    is.ignore(numeric_limits<streamsize>::max(), '\n');
 
+    obj.ND.clear();
     double grade;
     cout << "Input homework grades and press enter twice to finish: " << endl;
     while (true) {
         string input;
-        getline(cin, input);
+        getline(is, input);
         if (input.empty()) {
             break;
         }
         try {
             grade = stod(input);
             if (grade >= 0 && grade <= 10) {
-                ND.push_back(grade);
+                obj.ND.push_back(grade);
             } else {
                 cout << "Error. Enter number from 0 to 10..." << endl;
             }
@@ -69,6 +76,7 @@ void Stud::ived() {
             cout << "Error. Enter number from 0 to 10..." << endl;
         }
     }
+    return is;
 }
 
 void Stud::autom() {
@@ -83,16 +91,18 @@ void Stud::autom() {
     }
 }
 
-void Stud::output() const {
-    cout << left << setw(18) << vardas
-         << setw(20) << pavarde
-         << fixed << setprecision(2);
+ostream& operator<<(ostream& os, const Stud& obj) {
+    os << left << setw(18) << obj.getVardas()
+        << setw(20) << obj.getPavarde()
+        << fixed << setprecision(2);
 
-    if (suMediana) {
-        cout << rezmed << endl;
+    if (obj.suMediana) {
+        os << obj.rezmed;
     } else {
-        cout << rezvid << endl;
+        os << obj.rezvid;
     }
+    os << endl;
+    return os;
 }
 
 void Stud::val() {

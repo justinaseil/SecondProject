@@ -44,6 +44,8 @@ using std::partition;
 using std::stod;
 using std::transform;
 using std::chrono::steady_clock;
+using std::ostream;
+using std::istream;
 
 
 #endif // MYLIB_H_INCLUDED
