@@ -38,13 +38,6 @@ int main() {
         testavimas(students, filename, num);
         }
 
-        for (int num : numStudents) {
-        list<Stud> students;
-        string filename = "studentai" + to_string(num) + ".txt";
-        cout << "Testing with list container for file: " << filename << endl;
-        testavimas(students, filename, num);
-        }
-
         cout << "Do you want to continue the program? (Y/N): ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -147,7 +140,7 @@ int main() {
                         s.autom();
                         break;
                     } else if (choice == 'N' || choice == 'n') {
-                        s.ived();
+                        cin >> s;
                         break;
                     } else {
                         cout << "Error. Try again." << endl;
@@ -193,14 +186,14 @@ int main() {
     cout << left << setw(18) << "Vardas" << setw(18) << "Pavardė" << setw(25) << "Galutinis" << endl;
     cout << string(60, '-') << endl;
     for (const auto& student : vec1) {
-        student.output();
+        cout << student;
     }
 
     cout << "\nVargšiukai:\n";
     cout << left << setw(18) << "Vardas" << setw(18) << "Pavardė" << setw(25) << "Galutinis" << endl;
     cout << string(60, '-') << endl;
     for (const auto& student : vargsiukai) {
-        student.output();
+        cout << student;
     }
 
     FileManager::ratefailas(vec1, "kietekai.txt", "Kietekai");

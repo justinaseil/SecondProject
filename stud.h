@@ -22,6 +22,35 @@ public:
     Stud(const string& vard, const string& pav)
         : vardas(vard), pavarde(pav), egz(0), vid(0), med(0), suMediana(false) {}
 
+    Stud(const Stud& source) {
+        vardas = source.vardas;
+        pavarde = source.pavarde;
+        egz = source.egz;
+        ND = source.ND;
+        rezmed = source.rezmed;
+        rezvid = source.rezvid;
+        suMediana = source.suMediana;
+    }
+
+
+Stud& operator=(const Stud& source) {
+    if (this == &source) return *this;
+
+    vardas = source.vardas;
+    pavarde = source.pavarde;
+    ND = source.ND;
+    egz = source.egz;
+    vid = source.vid;
+    med = source.med;
+    rezvid = source.rezvid;
+    rezmed = source.rezmed;
+    suMediana = source.suMediana;
+
+    return *this;
+}
+
+
+
 ~Stud() {}
 
 const string& getVardas() const { return vardas; }
@@ -66,6 +95,10 @@ const string& getVardas() const { return vardas; }
     void output() const;
 
     void val();
+
+friend ostream& operator<<(std::ostream& os, const Stud& obj);
+friend istream& operator>>(std::istream& is, Stud& obj);
+
 };
 
 class FileManager {
@@ -158,6 +191,7 @@ public:
     auto start = steady_clock::now();
 
     ofstream file(filename);
+
     if (file.is_open()) {
         file << title << ":\n";
         file << left << setw(20) << "Vardas"
@@ -280,6 +314,9 @@ void testavimas(Container& students, const string& filename, int numStudents) {
 }
 
 void generuotifailus();
+
+
+
 
 
 #endif // STUD_H_INCLUDED
