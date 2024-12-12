@@ -3,26 +3,39 @@
 
 #include "mylib.h"
 
-class Stud {
-
-private:
+class Zmogus {
+protected:
     string vardas;
     string pavarde;
+
+    public:
+    Zmogus(const string& vardas, const string& pavarde)
+        : vardas(vardas), pavarde(pavarde) {}
+
+    virtual ~Zmogus() {}
+
+    const string& getVardas() const { return vardas; }
+    const string& getPavarde() const { return pavarde; }
+};
+
+
+class Stud : public Zmogus {
+private:
     vector<double> ND;
     double egz;
     double vid;
     double med;
     double rezvid;
     double rezmed;
-    bool suMediana = false;
-
+    bool suMediana;
 
 public:
-    Stud() : egz(0), vid(0), med(0), suMediana(false) {}
-    Stud(const string& vard, const string& pav)
-        : vardas(vard), pavarde(pav), egz(0), vid(0), med(0), suMediana(false) {}
+Stud() : Zmogus("Unknown", "Unknown"), egz(0), vid(0), med(0), suMediana(false) {}
 
-    Stud(const Stud& source) {
+    Stud(const string& vard, const string& pav)
+        : Zmogus(vard, pav), egz(0), vid(0), med(0), suMediana(false) {}
+
+    Stud(const Stud& source) : Zmogus(source){
         vardas = source.vardas;
         pavarde = source.pavarde;
         egz = source.egz;
@@ -36,8 +49,7 @@ public:
 Stud& operator=(const Stud& source) {
     if (this == &source) return *this;
 
-    vardas = source.vardas;
-    pavarde = source.pavarde;
+    Zmogus::operator=(source);
     ND = source.ND;
     egz = source.egz;
     vid = source.vid;

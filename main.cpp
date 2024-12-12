@@ -169,8 +169,8 @@ int main() {
                     s.galutinisvid();
                     }
 
-                    cout << "Student address in memory: " << &s << endl;
                     vec1.push_back(s);
+                    cout << "Student " << i + 1 << " address in memory: " << &vec1[i] << endl;
                     s.val();
             }
         }
