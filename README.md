@@ -1,6 +1,6 @@
 # Mano Projektas
 
-Ši programa skirta darbui su studentų duomenimis. Ji leidžia įvesti studentų vardus, pavardes, egzamino ir namų darbų rezultatus. Įvedant galima pasirinkti, kad pažymius sugeneruotų programa. Duomenis galima nuskaityti iš failo, o neturint failų juos sugeneruoti su 1000, 10000, 100000, 1000000, 10000000 įrašų. Norint patikrinti programos spartą, galima testuoti programą. Programa testuoti galima tiek su veiktor tiek su list konteineriais. Programa suskaičiuoja studento vidurkį ir mediana, tada studentas gali pasirinti, ar galutinis rezultatas bus skaičiuojamas su mediana, ar su vidurkiu ir apskaičiuojama tokiu būdu: galutinis rezultatas = 0.4 * vidurkis/mediana + 0.6 * egzaminas. Taip pat programa skirsto studentus į dvi kategorijas – "kietekai" (studentai, kurių galutinis pažymys ≥ 5) ir "vargšiukai" (galutinis pažymys < 5) ir tada suručiuoja pagal vardo raides abėcėlės tvarka.
+Ši programa skirta darbui su studentų duomenimis. Ji leidžia įvesti studentų vardus, pavardes, egzamino ir namų darbų rezultatus. Įvedant galima pasirinkti, kad pažymius sugeneruotų programa. Duomenis galima nuskaityti iš failo, o neturint failų juos sugeneruoti su 1000, 10000, 100000, 1000000, 10000000 įrašų. Norint patikrinti programos spartą, galima testuoti programą. Programa testuoti galima tiek su veiktor tiek su list konteineriais. Programa suskaičiuoja studento vidurkį ir mediana, tada studentas gali pasirinti, ar galutinis rezultatas bus skaičiuojamas su mediana, ar su vidurkiu ir apskaičiuojama tokiu būdu: galutinis rezultatas = 0.4 * vidurkis/mediana + 0.6 * egzaminas. Taip pat programa skirsto studentus į dvi kategorijas – "kietekai" (studentai, kurių galutinis pažymys ≥ 5) ir "vargšiukai" (galutinis pažymys < 5) ir tada surušiuoja pagal vardo raides abėcėlės tvarka.
 
 Programa apima šiuos pagrindinius funkcionalumus:
 1. **Duomenų įvestis:**
@@ -20,3 +20,13 @@ Programa apima šiuos pagrindinius funkcionalumus:
     * Didelių failų (pvz., 1000, 10000, 100000, 1000000, 10000000 studentų įrašų) generavimas, nuskaitymas ir testavimas. Naudojamos funkcijos: static void genfailas(const string& filename, int numStudents); static void nuskaitymas(Container& students, const string& filename); void testavimas(Container& students, const string& filename, int numStudents);
 
 <img width="487" alt="Screenshot 2024-12-06 at 19 02 58" src="https://github.com/user-attachments/assets/9ef7fc13-b29a-4790-8957-3b57737446ee">
+
+Versijoje v1.5 buvo sukurta bazinė (abstrakti) klasę, skirtą bendrai aprašyti žmogų ir tuomet iš jos išvestinę (derived) klasę - Studentas. Užtikrinimui,kad klasė būtų abstrakti buvo naudoja funkcija "abstraktas".
+
+Norint įsitikinti, kad Žmogus yra abstrakti klasė buvo pabandyta sukurti objektą iš klasės žmogus:
+<img width="1080" alt="Screenshot 2024-12-13 at 19 11 02" src="https://github.com/user-attachments/assets/34b7dfcd-8927-4549-9ee1-ef92ed331471" />
+
+Matome, kad objekto sukurti nepavyko, todėl matome, kad klasė žmogus yra abstrakti.
+
+
+
