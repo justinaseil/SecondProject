@@ -21,7 +21,7 @@ Programa apima šiuos pagrindinius funkcionalumus:
 
 <img width="487" alt="Screenshot 2024-12-06 at 19 02 58" src="https://github.com/user-attachments/assets/9ef7fc13-b29a-4790-8957-3b57737446ee">
 
-Versijoje v1.5 bazinė (abstrakti) klasę, skirta bendrai aprašyti žmogų ir tuomet iš jos išvestinę (derived) klasę - Studentas.
+Versijoje v1.5 bazinė (abstrakti) klasę, skirta bendrai aprašyti žmogų ir tuomet iš jos išvestinę (derived) klasę - Stud.
 Norint įsitikinti, ar klasė yra abstrakti, reikėtų patikrinti, ar nesusikuria objektas iš klasės Žmogus:
 
 <img width="1080" alt="Screenshot 2024-12-13 at 19 11 02" src="https://github.com/user-attachments/assets/84b4a306-4c6c-4a3a-ae17-e91388bb4e55" />
