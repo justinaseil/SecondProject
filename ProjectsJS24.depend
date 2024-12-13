@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1734033318 source:/mif/stud3/2023/juse0005/c++/ProjectsJS24/main.cpp
+1734107351 source:/mif/stud3/2023/juse0005/c++/ProjectsJS24/main.cpp
 	"mylib.h"
 	"stud.h"
 
@@ -20,7 +20,7 @@
 	<chrono>
 	<list>
 
-1734031847 /mif/stud3/2023/juse0005/c++/ProjectsJS24/stud.h
+1734108157 /mif/stud3/2023/juse0005/c++/ProjectsJS24/stud.h
 	"mylib.h"
 
 1733443513 source:/mif/stud3/2023/juse0005/c++/ProjectsJS24/stud.cpp
