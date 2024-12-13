@@ -17,7 +17,7 @@ protected:
     const string& getVardas() const { return vardas; }
     const string& getPavarde() const { return pavarde; }
 
-    virtual void val() = 0;
+virtual void abstraktas() const = 0;
 };
 
 
@@ -32,6 +32,8 @@ private:
     bool suMediana;
 
 public:
+    void abstraktas() const override {
+    }
 Stud() : Zmogus("Unknown", "Unknown"), egz(0), vid(0), med(0), suMediana(false) {}
 
     Stud(const string& vard, const string& pav)
@@ -63,12 +65,8 @@ Stud& operator=(const Stud& source) {
     return *this;
 }
 
-
-
 ~Stud() {}
 
-const string& getVardas() const { return vardas; }
-    const string& getPavarde() const { return pavarde; }
     vector<double>& getND() { return ND; }
     double getEgz() const { return egz; }
     double getVid() const { return vid; }
@@ -327,9 +325,6 @@ void testavimas(Container& students, const string& filename, int numStudents) {
 }
 
 void generuotifailus();
-
-
-
 
 
 #endif // STUD_H_INCLUDED

@@ -31,12 +31,28 @@ int main() {
         }
         cout << "Testing with vector and list containers." << endl;
 
-        for (int num : numStudents) {
-        vector<Stud> students;
-        string filename = "studentai" + to_string(num) + ".txt";
-        cout << "Testing with vector container for file: " << filename << endl;
-        testavimas(students, filename, num);
-        }
+        char containerChoice;
+            cout << "Which container would you like to use vector (V) or list (L)?";
+            cin >> containerChoice;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            if (containerChoice == 'V' || containerChoice == 'v') {
+                for (int num : numStudents) {
+                    vector<Stud> students;
+                    string filename = "studentai" + to_string(num) + ".txt";
+                    cout << "Testing with vector container for file: " << filename << endl;
+                    testavimas(students, filename, num);
+                }
+            } else if (containerChoice == 'L' || containerChoice == 'l') {
+                for (int num : numStudents) {
+                    list<Stud> students;
+                    string filename = "studentai" + to_string(num) + ".txt";
+                    cout << "Testing with list container for file: " << filename << endl;
+                    testavimas(students, filename, num);
+                }
+            } else {
+                cout << "Error. Try again" << endl;
+            }
 
         cout << "Do you want to continue the program? (Y/N): ";
         cin >> choice;
@@ -169,8 +185,8 @@ int main() {
                     s.galutinisvid();
                     }
 
-                    cout << "Student address in memory: " << &s << endl;
                     vec1.push_back(s);
+                    cout << "Student " << i + 1 << " address in memory: " << &vec1[i] << endl;
                     s.val();
             }
         }
