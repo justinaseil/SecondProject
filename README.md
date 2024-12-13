@@ -20,3 +20,10 @@ Programa apima šiuos pagrindinius funkcionalumus:
     * Didelių failų (pvz., 1000, 10000, 100000, 1000000, 10000000 studentų įrašų) generavimas, nuskaitymas ir testavimas. Naudojamos funkcijos: static void genfailas(const string& filename, int numStudents); static void nuskaitymas(Container& students, const string& filename); void testavimas(Container& students, const string& filename, int numStudents);
 
 <img width="487" alt="Screenshot 2024-12-06 at 19 02 58" src="https://github.com/user-attachments/assets/9ef7fc13-b29a-4790-8957-3b57737446ee">
+
+Versijoje v1.5 bazinė (abstrakti) klasę, skirta bendrai aprašyti žmogų ir tuomet iš jos išvestinę (derived) klasę - Studentas.
+Norint įsitikinti, ar klasė yra abstrakti, reikėtų patikrinti, ar nesusikuria objektas iš klasės Žmogus:
+
+<img width="1080" alt="Screenshot 2024-12-13 at 19 11 02" src="https://github.com/user-attachments/assets/84b4a306-4c6c-4a3a-ae17-e91388bb4e55" />
+
+Pabandžius, kurti objektą iš klasės žmogus, jo sukurti nepavyko, todėl reiškia, kad klasė yra abstrakti.
