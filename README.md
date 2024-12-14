@@ -92,6 +92,9 @@ Matome, kad vienareikšmiškai greičiau veikė Class.
 
 Greičiausiai veikė Struct su tiek su O1, tiek su O2, tiek su O3, bet užemė daugiau vietos nei Class. Class greičiausiai veikė su O3, bet užemė daugiau vietos nei O1 ir O2. 
 
+# V1.2
+
+Šioje versijoje buvo realizuotu "Rule of Three" ir išvesties, įvesties operatoriai turimai Stud klasei.
 
 # V1.5
 
