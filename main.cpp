@@ -2,10 +2,42 @@
 #include "stud.h"
 
 int main() {
-    vector<Stud> vec1;
-    vector<Stud> vargsiukai;
-    Stud s;
-    vector<int> numStudents = {1000000, 10000000};
+    char choice;
+    bool useVector = true;
+    RuleOfThree();
+    //Zmogus zmogus ("Justina", "Seiliunaite");
+
+    while (true) {
+        cout << "Choose container type (V for vector, L for list): ";
+        cin >> choice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (choice == 'V' || choice == 'v') {
+            useVector = true;
+            break;
+        } else if (choice == 'L' || choice == 'l') {
+            useVector = false;
+            break;
+        } else {
+            cout << "Error. Please enter 'V' for vector or 'L' for list." << endl;
+        }
+    }
+if (useVector) {
+    vector<Stud<vector<double>>> students;
+    programLoop(students);
+} else {
+    list<Stud<list<double>>> students;
+    programLoop(students);
+}
+
+    return 0;
+}
+
+template <typename Container>
+void programLoop(Container& students) {
+    using StudType = typename Container::value_type;
+    Container vargsiukai;
+    StudType temp;
+    vector<int> numStudents = {1000, 10000, 100000, 1000000, 10000000};
     char choice;
     bool suMediana = false;
 
@@ -29,37 +61,20 @@ int main() {
         } else {
             cout << "Error.Try again" << endl;
         }
-        cout << "Testing with vector and list containers." << endl;
 
-        char containerChoice;
-            cout << "Which container would you like to use vector (V) or list (L)?";
-            cin >> containerChoice;
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            if (containerChoice == 'V' || containerChoice == 'v') {
-                for (int num : numStudents) {
-                    vector<Stud> students;
-                    string filename = "studentai" + to_string(num) + ".txt";
-                    cout << "Testing with vector container for file: " << filename << endl;
-                    testavimas(students, filename, num);
-                }
-            } else if (containerChoice == 'L' || containerChoice == 'l') {
-                for (int num : numStudents) {
-                    list<Stud> students;
-                    string filename = "studentai" + to_string(num) + ".txt";
-                    cout << "Testing with list container for file: " << filename << endl;
-                    testavimas(students, filename, num);
-                }
-            } else {
-                cout << "Error. Try again" << endl;
-            }
+        for (int num : numStudents) {
+        typename Container::value_type temp;
+        string filename = "studentai" + to_string(num) + ".txt";
+        cout << "Testing file: " << filename << endl;
+        testavimas(students, filename, num);
+        }
 
         cout << "Do you want to continue the program? (Y/N): ";
         cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == 'N' || choice == 'n') {
-                return 0;
+                return;
                 } else if (choice == 'Y' || choice == 'y'){
                     break;
                 } else {
@@ -87,8 +102,7 @@ int main() {
         string filename;
         cout << "Enter the filename: ";
         cin >> filename;
-
-        FileManager::nuskaitymas(vec1, filename);
+        FileManager::nuskaitymas(students, filename);
 
 
         while (true) {
@@ -106,7 +120,7 @@ int main() {
             }
         }
 
-        for (auto& student : vec1) {
+   for (auto& student : students) {
         student.setSuMediana(suMediana);
         if (suMediana) {
             student.galutinismed();
@@ -114,6 +128,15 @@ int main() {
             student.galutinisvid();
                 }
             }
+
+            Rusiavimas::rusiavimas(students, vargsiukai, suMediana);
+
+        Rusiavimas::sortabc(students);
+        Rusiavimas::sortabc(vargsiukai);
+
+        FileManager::ratefailas(students, "kietekai_" + filename, "Kietekai");
+        FileManager::ratefailas(vargsiukai, "vargsiukai_" + filename, "Vargšiukai");
+
     } else {
 
         while (true) {
@@ -122,7 +145,7 @@ int main() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
             if (choice == 'Y' || choice == 'y') {
                 generuotifailus();
-                return 0;
+                return;
             } else if (choice == 'N' || choice == 'n') {
                 break;
             } else {
@@ -146,6 +169,7 @@ int main() {
             }
 
             for (int i = 0; i < n; i++) {
+                typename Container::value_type temp;
                 cout << "Please input user data for student " << endl;
 
                 while (true) {
@@ -153,10 +177,10 @@ int main() {
                     cin >> choice;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     if (choice == 'Y' || choice == 'y') {
-                        s.autom();
+                        temp.autom();
                         break;
                     } else if (choice == 'N' || choice == 'n') {
-                        cin >> s;
+                        cin >> temp;
                         break;
                     } else {
                         cout << "Error. Try again." << endl;
@@ -178,48 +202,45 @@ int main() {
                     }
                 }
 
-                s.setSuMediana(suMediana);
+                temp.setSuMediana(suMediana);
                 if (suMediana) {
-                        s.galutinismed();
+                        temp.galutinismed();
                 } else {
-                    s.galutinisvid();
+                    temp.galutinisvid();
                     }
 
-                    vec1.push_back(s);
-                    cout << "Student " << i + 1 << " address in memory: " << &vec1[i] << endl;
-                    s.val();
+                    students.push_back(temp);
+                    cout << "Memory address of the student in container: " << &students.back() << endl;
+                    temp.val();
             }
-        }
 
+            Rusiavimas::rusiavimas(students, vargsiukai, suMediana);
+            Rusiavimas::sortabc(students);
+            Rusiavimas::sortabc(vargsiukai);
 
-    Rusiavimas::rusiavimas(vec1, vargsiukai, suMediana);
+            cout << "\nKietekai:\n";
+            cout << left << setw(18) << "Vardas" << setw(18) << "Pavardė" << setw(25) << "Galutinis" << endl;
+            cout << string(60, '-') << endl;
+            for (const auto& student : students) {
+                    cout << student;
+            }
 
-    Rusiavimas::sortabc(vec1);
-    Rusiavimas::sortabc(vargsiukai);
+            cout << "\nVargšiukai:\n";
+            cout << left << setw(18) << "Vardas" << setw(18) << "Pavardė" << setw(25) << "Galutinis" << endl;
+            cout << string(60, '-') << endl;
+            for (const auto& student : vargsiukai) {
+                    cout << student;
+            }
 
-
-    cout << "\nKietekai:\n";
-    cout << left << setw(18) << "Vardas" << setw(18) << "Pavardė" << setw(25) << "Galutinis" << endl;
-    cout << string(60, '-') << endl;
-    for (const auto& student : vec1) {
-        cout << student;
+            FileManager::ratefailas(students, "kietekai.txt", "Kietekai");
+            FileManager::ratefailas(vargsiukai, "vargsiukai.txt", "Vargšiukai");
     }
-
-    cout << "\nVargšiukai:\n";
-    cout << left << setw(18) << "Vardas" << setw(18) << "Pavardė" << setw(25) << "Galutinis" << endl;
-    cout << string(60, '-') << endl;
-    for (const auto& student : vargsiukai) {
-        cout << student;
-    }
-
-    FileManager::ratefailas(vec1, "kietekai.txt", "Kietekai");
-    FileManager::ratefailas(vargsiukai, "vargsiukai.txt", "Vargšiukai");
-
 
     char a;
     cout << "Press any key to exit..." << endl;
     cin >> a;
 
-    return 0;
 
 }
+
+

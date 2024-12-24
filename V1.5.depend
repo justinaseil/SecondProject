@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1734633570 source:/mif/stud3/2023/juse0005/v1.5/V1.5/main.cpp
+	"mylib.h"
+	"stud.h"
+
+1734552502 /mif/stud3/2023/juse0005/v1.5/V1.5/mylib.h
+	<iostream>
+	<string>
+	<vector>
+	<list>
+	<numeric>
+	<iomanip>
+	<algorithm>
+	<limits>
+	<random>
+	<cstdlib>
+	<ctime>
+	<fstream>
+	<sstream>
+	<chrono>
+	<list>
+
+1735047052 /mif/stud3/2023/juse0005/v1.5/V1.5/stud.h
+	"mylib.h"
+
+1735046663 source:/mif/stud3/2023/juse0005/v1.5/V1.5/stud.cpp
+	"stud.h"
+

@@ -46,6 +46,11 @@ using std::transform;
 using std::chrono::steady_clock;
 using std::ostream;
 using std::istream;
+using std::advance;
+using std::advance;
+using std::move;
+using std::prev;
 
 
 #endif // MYLIB_H_INCLUDED
+
